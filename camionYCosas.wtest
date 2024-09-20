@@ -9,7 +9,7 @@ describe "test de camion y cosas" {
     assert.that(camion.todoPesoPar())
   }
   
-  test "alguno pesa ..." {
+  test "alguno pesa " {
     camion.cargar(knightRider)
     camion.cargar(bumblebee)
     
@@ -26,7 +26,7 @@ describe "test de camion y cosas" {
     camion.cargar(bumblebee)
     
     assert.equals(knightRider, camion.elDeNivel(10))
-    assert.equals(bumblebee, camion.elDeNivel(15))
+    assert.equals(bumblebee, camion.elDeNivel(30))
     assert.throwsException({ camion.elDeNivel(17) })
   }
   
@@ -122,7 +122,7 @@ describe "test de camion y cosas" {
     assert.that(camion.tieneAlgoQuePesaEntre(700, 900))
     assert.notThat(camion.tieneAlgoQuePesaEntre(100, 200))
   }
-  test "la cosa más pesada es ..." {
+  test "la cosa más pesada es " {
     camion.cargar(knightRider)
     camion.cargar(bumblebee)
 
@@ -139,8 +139,6 @@ describe "test de camion y cosas" {
     camion.cargar(bumblebee)
     camion.cargar(bateriaAntiaerea)
 
-    // ¿map sí o sí funciona solo con listas? porque
-    // assert.equals(#{500, 800, 300}, camion.pesos()) espera una lista
     assert.equals([500, 800, 300], camion.pesos())
   }
   test "total de bultos" {
@@ -153,5 +151,30 @@ describe "test de camion y cosas" {
     camion.cargar(paqueteDeLadrillos)
 
     assert.equals(6, camion.totalBultos())
+  }
+  test "reacción de cosas" {
+    camion.cargar(bumblebee)
+    camion.cargar(paqueteDeLadrillos)
+    camion.cargar(arenaAGranel)
+    camion.cargar(bateriaAntiaerea)
+    camion.cargar(residuosRadiactivos)
+
+    assert.equals(robot, bumblebee.estado())
+    assert.equals(12, paqueteDeLadrillos.cantidad())
+    assert.equals(20, arenaAGranel.peso())
+    assert.equals(misiles, bateriaAntiaerea.estado())
+    assert.equals(15, residuosRadiactivos.peso())
+
+    bumblebee.estado(auto)
+    contenedorPortuario.cosas().add(bumblebee)
+    camion.cargar(contenedorPortuario)
+
+    assert.equals(robot, bumblebee.estado())
+
+    bateriaAntiaerea.estado(sinMisiles)
+    contenedorPortuario.cosas().add(bateriaAntiaerea)
+    camion.cargar(contenedorPortuario)
+
+    assert.equals(misiles, bateriaAntiaerea.estado())
   }
 }

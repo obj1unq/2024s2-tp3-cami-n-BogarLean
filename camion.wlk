@@ -5,6 +5,7 @@ object camion {
 	const tara = 1000
 	
 	method cargar(cosa) {
+		cosa.cambios()
 		cosas.add(cosa)
 	}
 	
@@ -18,7 +19,9 @@ object camion {
 	
 	method hayAlgunoQuePesa(peso) = cosas.any({ cosa => cosa.peso() == peso })
 	
-	method elDeNivel(nivel) = cosas.find({ cosa => cosa.nivelPeligrosidad() == nivel })
+	method elDeNivel(nivel) = cosas.find(
+		{ cosa => cosa.nivelPeligrosidad() == nivel }
+	)
 	
 	method tara() = tara
 	

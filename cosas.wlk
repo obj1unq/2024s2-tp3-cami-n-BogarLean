@@ -2,6 +2,11 @@ object knightRider {
 	const property peso = 500
 	const property nivelPeligrosidad = 10
 	const property bultos = 1
+	
+	method cambios() {
+		
+		// nada
+	}
 }
 
 object bumblebee {
@@ -10,6 +15,10 @@ object bumblebee {
 	const property bultos = 2
 	
 	method nivelPeligrosidad() = estado.nivelPeligrosidad()
+	
+	method cambios() {
+		estado = robot
+	}
 }
 
 object auto {
@@ -21,9 +30,9 @@ object robot {
 }
 
 object paqueteDeLadrillos {
-	var property cantidad = 1
+	var property cantidad = 0
 	const property nivelPeligrosidad = 2
-
+	
 	// ¿Tiene sentido que la cantidad sea 0
 	// y que el bulto siga siendo 1? tal vez la cantidad
 	// no debería ser 0 o menor a 0
@@ -32,15 +41,22 @@ object paqueteDeLadrillos {
 	} else {
 		if (cantidad.between(101, 300)) 2 else 3
 	}
-	method peso() {
-		return cantidad * 2
+	
+	method peso() = cantidad * 2
+	
+	method cambios() {
+		cantidad += 12
 	}
 }
 
 object arenaAGranel {
-	var property peso = 1
+	var property peso = 0
 	const property nivelPeligrosidad = 1
 	const property bultos = 1
+	
+	method cambios() {
+		peso += 20
+	}
 }
 
 object bateriaAntiaerea {
@@ -52,6 +68,10 @@ object bateriaAntiaerea {
 	method nivelPeligrosidad() = estado.nivelPeligrosidad()
 	
 	method bultos() = estado.bultos()
+	
+	method cambios() {
+		estado = misiles
+	}
 }
 
 object misiles {
@@ -61,7 +81,7 @@ object misiles {
 }
 
 object sinMisiles {
-	const property peso = 0
+	const property peso = 200
 	const property nivelPeligrosidad = 0
 	const property bultos = 1
 }
@@ -69,8 +89,7 @@ object sinMisiles {
 object contenedorPortuario {
 	const property cosas = #{}
 	const pesoPropio = 100
-	
-	//¿Es necesario que el contenedor pueda cargar y descargar cosas?
+
 	method peso() = pesoPropio + self.pesoDeCosas()
 	
 	method pesoDeCosas() = cosas.sum({ cosa => cosa.peso() })
@@ -82,12 +101,20 @@ object contenedorPortuario {
 	method bultos() {
 		cosas.sum({ cosa => cosa.bultos() })
 	}
+	
+	method cambios() {
+		cosas.forEach({ cosa => cosa.cambios() })
+	}
 }
 
 object residuosRadiactivos {
 	var property peso = 0
 	const property nivelPeligrosidad = 200
 	const property bultos = 1
+	
+	method cambios() {
+		peso += 15
+	}
 }
 
 object embalajeDeSeguridad {
@@ -97,4 +124,9 @@ object embalajeDeSeguridad {
 	method peso() = cosa.peso()
 	
 	method nivelPeligrosidad() = cosa.nivelPeligrosidad() / 2
+	
+	method cambios() {
+		
+		// nada
+	}
 }
