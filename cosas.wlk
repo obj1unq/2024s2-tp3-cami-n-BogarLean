@@ -1,11 +1,14 @@
 object knightRider {
 	const property peso = 500
 	const property nivelPeligrosidad = 10
+	const property bultos = 1
 }
 
 object bumblebee {
 	const property peso = 800
 	var property estado = auto
+	const property bultos = 2
+	
 	
 	method nivelPeligrosidad() = estado.nivelPeligrosidad()
 }
@@ -19,13 +22,18 @@ object robot {
 }
 
 object paqueteDeLadrillos {
-	var property cantidad = 0
+	var property cantidad = 1
 	const property nivelPeligrosidad = 2
+
+	// hasta 100 ladrillos = 1 bultos
+	// de 101 a 300 = 2 bultos
+	// de 301 en adelante = 3 bultos
 }
 
 object arenaAGranel {
-	var property peso = 0
+	var property peso = 1
 	const property nivelPeligrosidad = 1
+	const property bultos = 1
 }
 
 object bateriaAntiaerea {
@@ -66,10 +74,20 @@ object contenedorPortuario {
 object residuosRadiactivos {
 	var property peso = 0
 	const property nivelPeligrosidad = 200
+	const property bultos = 1
 }
 
 object embalajeDeSeguridad {
-	//Pensando
+	var property cosa = knightRider
+	const property bultos = 2
+
+	method peso() {
+		return cosa.peso()
+	}
+
+	method nivelPeligrosidad() {
+		return cosa.nivelPeligrosidad() / 2
+	}
 }
 
 

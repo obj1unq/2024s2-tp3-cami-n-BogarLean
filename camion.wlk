@@ -39,4 +39,18 @@ object camion {
 	) = self.excedidoDePeso() and self.objetosQueSuperanPeligrosidad(
 		nivelMaximoPeligrosidad
 	).isEmpty()
+	
+	method tieneAlgoQuePesaEntre(min, max) = cosas.any(
+		{ cosa => (cosa.peso() >= min) and (cosa.peso() <= max) }
+	)
+	
+	method cosaMasPesada() {
+		return cosas.max({cosa => cosa.peso()})
+	}
+	
+	method pesos() = cosas.map({ cosa => cosa.peso() })
+
+	method totalBultos() {
+		return cosas.sum({cosa => cosa.bultos()})
+	}
 }
