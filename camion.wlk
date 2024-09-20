@@ -27,7 +27,7 @@ object camion {
 	method excedidoDePeso() = self.pesoTotal() > 2500
 	
 	method objetosQueSuperanPeligrosidad(nivel) = cosas.filter(
-		{ cosa => cosa.peso() >= nivel }
+		{ cosa => cosa.nivelPeligrosidad() > nivel }
 	)
 	
 	method objetosMasPeligrososQue(cosa) = cosas.filter(
