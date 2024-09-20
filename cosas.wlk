@@ -9,7 +9,6 @@ object bumblebee {
 	var property estado = auto
 	const property bultos = 2
 	
-	
 	method nivelPeligrosidad() = estado.nivelPeligrosidad()
 }
 
@@ -24,10 +23,15 @@ object robot {
 object paqueteDeLadrillos {
 	var property cantidad = 1
 	const property nivelPeligrosidad = 2
-
+	
 	// hasta 100 ladrillos = 1 bultos
 	// de 101 a 300 = 2 bultos
 	// de 301 en adelante = 3 bultos
+	method bultos() = if (cantidad <= 100) {
+		1
+	} else {
+		if (cantidad.between(101, 300)) 2 else 3
+	}
 }
 
 object arenaAGranel {
@@ -39,23 +43,24 @@ object arenaAGranel {
 object bateriaAntiaerea {
 	var property estado = misiles
 	
-	// El peso y el nivel de peligrosidad dependen del estado
-	// por eso no pongo que sean variables
+	// El peso, el nivel de peligrosidad y los bultos dependen del estado
 	method peso() = estado.peso()
 	
-	method nivelPeligrosidad() {
-		estado.nivelPeligrosidad()
-	}
+	method nivelPeligrosidad() = estado.nivelPeligrosidad()
+	
+	method bultos() = estado.bultos()
 }
 
 object misiles {
 	const property peso = 300
 	const property nivelPeligrosidad = 100
+	const property bultos = 2
 }
 
 object sinMisiles {
 	const property peso = 0
 	const property nivelPeligrosidad = 0
+	const property bultos = 1
 }
 
 object contenedorPortuario {
@@ -69,6 +74,10 @@ object contenedorPortuario {
 	method nivelPeligrosidad() = self.peligrosidadDeCosas().maxIfEmpty(0)
 	
 	method peligrosidadDeCosas() = cosas.map({ cosa => cosa.nivelPeligrosidad() })
+	
+	method bultos() {
+		cosas.sum({ cosa => cosa.bultos() })
+	}
 }
 
 object residuosRadiactivos {
@@ -80,14 +89,8 @@ object residuosRadiactivos {
 object embalajeDeSeguridad {
 	var property cosa = knightRider
 	const property bultos = 2
-
-	method peso() {
-		return cosa.peso()
-	}
-
-	method nivelPeligrosidad() {
-		return cosa.nivelPeligrosidad() / 2
-	}
+	
+	method peso() = cosa.peso()
+	
+	method nivelPeligrosidad() = cosa.nivelPeligrosidad() / 2
 }
-
-
