@@ -70,6 +70,7 @@ object contenedorPortuario {
 	const property cosas = #{}
 	const pesoPropio = 100
 	
+	//¿Es necesario que el contenedor pueda cargar y descargar cosas?
 	method peso() = pesoPropio + self.pesoDeCosas()
 	
 	method pesoDeCosas() = cosas.sum({ cosa => cosa.peso() })

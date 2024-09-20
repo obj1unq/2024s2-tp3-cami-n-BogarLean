@@ -36,7 +36,7 @@ object camion {
 	
 	method puedeCircularEnRuta(
 		nivelMaximoPeligrosidad
-	) = self.excedidoDePeso() and self.objetosQueSuperanPeligrosidad(
+	) = (not self.excedidoDePeso()) and self.objetosQueSuperanPeligrosidad(
 		nivelMaximoPeligrosidad
 	).isEmpty()
 	

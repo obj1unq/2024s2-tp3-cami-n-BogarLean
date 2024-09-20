@@ -24,27 +24,67 @@ describe "test de camion y cosas" {
     assert.equals(bumblebee, camion.elDeNivel(15))
     assert.throwsException({ camion.elDeNivel(17) })
   }
-    test "excediendo el peso total" {
+  
+  test "excediendo el peso total" {
     camion.cargar(knightRider)
     camion.cargar(bumblebee)
-
+    
     assert.equals(1000, camion.tara())
     assert.equals(2300, camion.pesoTotal())
     assert.notThat(camion.excedidoDePeso())
-
+    
     camion.cargar(paqueteDeLadrillos)
     paqueteDeLadrillos.cantidad(100)
-
+    
     assert.notThat(camion.excedidoDePeso())
-
+    
     paqueteDeLadrillos.cantidad(200)
     
     assert.that(camion.excedidoDePeso())
-    }
-    test "superar peligrosidad" {
+  }
+  
+  test "superar peligrosidad" {
     camion.cargar(knightRider)
     camion.cargar(bumblebee)
-
+    
     assert.equals(#{bumblebee}, camion.objetosQueSuperanPeligrosidad(10))
-    }
+  }
+  
+  test "objetos mas peligrosos que bumblebee" {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+    camion.cargar(bateriaAntiaerea)
+    
+    assert.equals(misiles, bateriaAntiaerea.estado())
+    assert.equals(
+      #{bateriaAntiaerea},
+      camion.objetosMasPeligrososQue(bumblebee)
+    )
+  }
+  
+  test "circular en la ruta" {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+    camion.cargar(bateriaAntiaerea)
+
+    assert.equals(2600, camion.pesoTotal())
+    assert.that(camion.excedidoDePeso())
+    assert.notThat(camion.puedeCircularEnRuta(5))
+
+    camion.descargar(bateriaAntiaerea)
+
+    assert.notThat(camion.excedidoDePeso())
+    assert.that(camion.puedeCircularEnRuta(900))
+    assert.notThat(camion.puedeCircularEnRuta(5))
+  }
+  test "contenedor portuario" {
+    contenedorPortuario.cosas().add(bumblebee)
+    contenedorPortuario.cosas().add(knightRider)
+
+    assert.equals(15, contenedorPortuario.nivelPeligrosidad())
+
+    contenedorPortuario.cosas().add(bateriaAntiaerea)
+
+    assert.equals(100, contenedorPortuario.nivelPeligrosidad())
+  }
 }
