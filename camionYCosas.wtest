@@ -9,11 +9,16 @@ describe "test de camion y cosas" {
     assert.that(camion.todoPesoPar())
   }
   
-  test "alguno pesa 800" {
+  test "alguno pesa ..." {
     camion.cargar(knightRider)
     camion.cargar(bumblebee)
     
     assert.that(camion.hayAlgunoQuePesa(800))
+    assert.that(camion.hayAlgunoQuePesa(500))
+
+    camion.descargar(bumblebee)
+
+    assert.notThat(camion.hayAlgunoQuePesa(800))
   }
   
   test "nivel de peligrosidad" {
@@ -77,7 +82,7 @@ describe "test de camion y cosas" {
     assert.that(camion.puedeCircularEnRuta(900))
     assert.notThat(camion.puedeCircularEnRuta(5))
   }
-  test "contenedor portuario" {
+  test "nivel de peligrosidad del contenedor portuario" {
     contenedorPortuario.cosas().add(bumblebee)
     contenedorPortuario.cosas().add(knightRider)
 
@@ -86,5 +91,27 @@ describe "test de camion y cosas" {
     contenedorPortuario.cosas().add(bateriaAntiaerea)
 
     assert.equals(100, contenedorPortuario.nivelPeligrosidad())
+  }
+  test "peso del contenedor portuario" {
+    assert.equals(100, contenedorPortuario.peso())
+
+    contenedorPortuario.cosas().add(bumblebee)
+    contenedorPortuario.cosas().add(knightRider)
+
+    assert.equals(1400, contenedorPortuario.peso())
+  }
+  test "peso del embalaje de seguridad" {
+    assert.equals(500, embalajeDeSeguridad.peso())
+
+    embalajeDeSeguridad.cosa(bumblebee)
+
+    assert.equals(800, embalajeDeSeguridad.peso())
+  }
+  test "nivel de peligrosidad del embalaje" {
+    assert.equals(5, embalajeDeSeguridad.nivelPeligrosidad())
+
+    embalajeDeSeguridad.cosa(bumblebee)
+
+    assert.equals(7.5, embalajeDeSeguridad.nivelPeligrosidad())
   }
 }

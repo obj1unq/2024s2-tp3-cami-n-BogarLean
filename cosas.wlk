@@ -24,9 +24,9 @@ object paqueteDeLadrillos {
 	var property cantidad = 1
 	const property nivelPeligrosidad = 2
 
-	// ¿Tiene sentido que la cantidad sea menor a 0
+	// ¿Tiene sentido que la cantidad sea 0
 	// y que el bulto siga siendo 1? tal vez la cantidad
-	// no debería ser menor a 0
+	// no debería ser 0 o menor a 0
 	method bultos() = if (cantidad <= 100) {
 		1
 	} else {
