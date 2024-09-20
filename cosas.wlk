@@ -23,14 +23,17 @@ object robot {
 object paqueteDeLadrillos {
 	var property cantidad = 1
 	const property nivelPeligrosidad = 2
-	
-	// hasta 100 ladrillos = 1 bultos
-	// de 101 a 300 = 2 bultos
-	// de 301 en adelante = 3 bultos
+
+	// ¿Tiene sentido que la cantidad sea menor a 0
+	// y que el bulto siga siendo 1? tal vez la cantidad
+	// no debería ser menor a 0
 	method bultos() = if (cantidad <= 100) {
 		1
 	} else {
 		if (cantidad.between(101, 300)) 2 else 3
+	}
+	method peso() {
+		return cantidad * 2
 	}
 }
 

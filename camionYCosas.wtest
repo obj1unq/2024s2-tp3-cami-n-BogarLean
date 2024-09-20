@@ -1,0 +1,27 @@
+import cosas.*
+import camion.*
+
+describe "test de camion y cosas" {
+  test "todo peso es par" {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+    
+    assert.that(camion.todoPesoPar())
+  }
+  
+  test "alguno pesa 800" {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+    
+    assert.that(camion.hayAlgunoQuePesa(800))
+  }
+  
+  test "nivel de peligrosidad" {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+    
+    assert.equals(knightRider, camion.elDeNivel(10))
+    assert.equals(bumblebee, camion.elDeNivel(15))
+    assert.throwsException({ camion.elDeNivel(17) })
+  }
+}

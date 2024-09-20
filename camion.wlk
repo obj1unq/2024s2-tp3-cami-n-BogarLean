@@ -18,7 +18,7 @@ object camion {
 	
 	method hayAlgunoQuePesa(peso) = cosas.any({ cosa => cosa.peso() == peso })
 	
-	method elDeNivel(nivel) = cosas.find({ cosa => cosa.nivelPeligrosidad(nivel) })
+	method elDeNivel(nivel) = cosas.find({ cosa => cosa.nivelPeligrosidad() == nivel })
 	
 	method tara() = tara
 	
