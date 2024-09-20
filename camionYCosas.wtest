@@ -114,4 +114,44 @@ describe "test de camion y cosas" {
 
     assert.equals(7.5, embalajeDeSeguridad.nivelPeligrosidad())
   }
+  test "tiene algo que pesa entre" {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+
+    assert.that(camion.tieneAlgoQuePesaEntre(100, 500))
+    assert.that(camion.tieneAlgoQuePesaEntre(700, 900))
+    assert.notThat(camion.tieneAlgoQuePesaEntre(100, 200))
+  }
+  test "la cosa más pesada es ..." {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+
+    assert.equals(bumblebee, camion.cosaMasPesada())
+
+    camion.cargar(paqueteDeLadrillos)
+    paqueteDeLadrillos.cantidad(500)
+
+    assert.notEquals(bumblebee, camion.cosaMasPesada())
+    assert.equals(paqueteDeLadrillos, camion.cosaMasPesada())
+  }
+  test "pesos de las cosas del camión" {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+    camion.cargar(bateriaAntiaerea)
+
+    // ¿map sí o sí funciona solo con listas? porque
+    // assert.equals(#{500, 800, 300}, camion.pesos()) espera una lista
+    assert.equals([500, 800, 300], camion.pesos())
+  }
+  test "total de bultos" {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+    camion.cargar(bateriaAntiaerea)
+
+    assert.equals(5, camion.totalBultos())
+
+    camion.cargar(paqueteDeLadrillos)
+
+    assert.equals(6, camion.totalBultos())
+  }
 }
