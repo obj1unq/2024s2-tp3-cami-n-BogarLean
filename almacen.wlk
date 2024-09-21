@@ -16,8 +16,10 @@ object almacen {
         }
     }
     method excesoDeBultos(cantidad) {
-      return maxBultos < cantidad
+      return (maxBultos - self.totalBultos()) <= cantidad
     }
+
+    method totalBultos() = deposito.sum({ cosa => cosa.bultos() })
 }
 object ruta9 {
     var property pesoSoportado = 800
