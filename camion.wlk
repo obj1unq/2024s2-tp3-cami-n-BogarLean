@@ -54,6 +54,9 @@ object camion {
 	method totalBultos() = cosas.sum({ cosa => cosa.bultos() })
 
 	method transportar(destino, camino) {
-		
+		//validar los bultos máximos del destino
+		//validar el peso soportado por el camino
+		destino.depositar(self)
+		self.cosas().clear()
 	}
 }

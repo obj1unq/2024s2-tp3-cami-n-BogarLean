@@ -8,8 +8,8 @@ object almacen {
     }
 }
 object ruta9 {
-  
+    var property pesoSoportado = 800
 }
 object caminosVecinales {
-  
+    var property pesoSoportado = 500
 }
