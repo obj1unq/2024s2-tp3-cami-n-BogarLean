@@ -1,5 +1,7 @@
 import cosas.*
 import camion.*
+import almacen.*
+
 
 describe "test de camion y cosas" {
   test "todo peso es par" {
@@ -176,5 +178,23 @@ describe "test de camion y cosas" {
     camion.cargar(contenedorPortuario)
 
     assert.equals(misiles, bateriaAntiaerea.estado())
+  }
+  test "peso soportado de los caminos" {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+
+    assert.equals(2300, camion.pesoTotal())
+    assert.notThat(caminosVecinales.puedeViajar(camion.pesoTotal()))
+
+    paqueteDeLadrillos.cantidad(338)
+    camion.cargar(paqueteDeLadrillos)
+
+    //assert.throwsException({ ruta9.validarPesoSoportado(camion) })
+    assert.equals(3000, camion.pesoTotal())
+    assert.doesNotThrowException({caminosVecinales.validarViajar(camion)})
+
+    camion.cargar(residuosRadiactivos)
+
+    assert.equals(3015, camion.pesoTotal())
   }
 }

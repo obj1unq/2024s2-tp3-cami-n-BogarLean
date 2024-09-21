@@ -55,7 +55,7 @@ object camion {
 
 	method transportar(destino, camino) {
 		destino.validarBultos(self)
-		camino.validarPesoSoportado(self)
+		camino.validarViajar(self)
 		destino.depositar(self)
 		self.cosas().clear()
 	}

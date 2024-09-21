@@ -22,28 +22,25 @@ object almacen {
     method totalBultos() = deposito.sum({ cosa => cosa.bultos() })
 }
 object ruta9 {
-    var property pesoSoportado = 800
+    const property peligrosidadMaxima = 11
 
-    method validarPesoSoportado(camion) {
-        if (not self.excesoDePeso(camion.pesoTotal())) {
-            self.error("El camión pesa " + camion.pesoTotal() + " y la 
-            ruta 9 soporta " + pesoSoportado)
+    method validarViajar(camion) {
+        if ( camion.puedeCircularEnRuta(peligrosidadMaxima) ) {
+            self.error("La ruta 9 soporta " + peligrosidadMaxima + 
+            " de nivel de peligrosidad")
         }
-    }
-    method excesoDePeso(cantidad) {
-      return pesoSoportado <= cantidad
     }
 }
 object caminosVecinales {
-    var property pesoSoportado = 500
+    var property pesoSoportado = 3000
 
-    method validarPesoSoportado(camion) {
-        if (not self.excesoDePeso(camion.pesoTotal())) {
+    method validarViajar(camion) {
+        if (not self.puedeViajar(camion.pesoTotal())) {
             self.error("El camión pesa " + camion.pesoTotal() + " y los 
             caminos vecinales soportan " + pesoSoportado)
         }
     }
-    method excesoDePeso(cantidad) {
+    method puedeViajar(cantidad) {
       return pesoSoportado <= cantidad
     }
 }
