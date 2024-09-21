@@ -25,7 +25,7 @@ object ruta9 {
     const property peligrosidadMaxima = 11
 
     method validarViajar(camion) {
-        if ( camion.puedeCircularEnRuta(peligrosidadMaxima) ) {
+        if ( not camion.puedeCircularEnRuta(peligrosidadMaxima) ) {
             self.error("La ruta 9 soporta " + peligrosidadMaxima + 
             " de nivel de peligrosidad")
         }

@@ -89,7 +89,7 @@ object sinMisiles {
 object contenedorPortuario {
 	const property cosas = #{}
 	const pesoPropio = 100
-
+	
 	method peso() = pesoPropio + self.pesoDeCosas()
 	
 	method pesoDeCosas() = cosas.sum({ cosa => cosa.peso() })
