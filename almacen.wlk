@@ -41,6 +41,6 @@ object caminosVecinales {
         }
     }
     method puedeViajar(cantidad) {
-      return pesoSoportado <= cantidad
+      return pesoSoportado >= cantidad
     }
 }

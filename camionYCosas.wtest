@@ -193,19 +193,20 @@ describe "test de camion y cosas" {
     camion.cargar(bumblebee)
     
     assert.equals(2300, camion.pesoTotal())
-    assert.notThat(caminosVecinales.puedeViajar(camion.pesoTotal()))
+    assert.that(caminosVecinales.puedeViajar(camion.pesoTotal()))
     
     paqueteDeLadrillos.cantidad(338)
     camion.cargar(paqueteDeLadrillos)
     
     assert.equals(3000, camion.pesoTotal())
+    assert.that(caminosVecinales.puedeViajar(camion.pesoTotal()))
     assert.doesNotThrowException({ caminosVecinales.validarViajar(camion) })
     
     camion.cargar(residuosRadiactivos)
     
     assert.equals(3015, camion.pesoTotal())
-    //assert.notThat(caminosVecinales.puedeViajar(camion.pesoTotal()))
-    //assert.throwsException({ caminosVecinales.validarViajar(camion) })
+    assert.notThat(caminosVecinales.puedeViajar(camion.pesoTotal()))
+    assert.throwsException({ caminosVecinales.validarViajar(camion) })
   }
   
   test "peligrosidad de la ruta 9" {
