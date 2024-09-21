@@ -3,6 +3,7 @@ import cosas.*
 object camion {
 	const property cosas = #{}
 	const tara = 1000
+	const property pesoMaximo = 2500
 	
 	method cargar(cosa) {
 		cosa.cambios()
@@ -21,13 +22,13 @@ object camion {
 	
 	method elDeNivel(nivel) = cosas.find(
 		{ cosa => cosa.nivelPeligrosidad() == nivel }
-	)
+	) // ↑ Se podría poner una excepción si no lo encuentra
 	
 	method tara() = tara
 	
 	method pesoTotal() = self.tara() + cosas.sum({ cosa => cosa.peso() })
 	
-	method excedidoDePeso() = self.pesoTotal() > 2500
+	method excedidoDePeso() = self.pesoTotal() > pesoMaximo
 	
 	method objetosQueSuperanPeligrosidad(nivel) = cosas.filter(
 		{ cosa => cosa.nivelPeligrosidad() > nivel }
@@ -54,9 +55,15 @@ object camion {
 	method totalBultos() = cosas.sum({ cosa => cosa.bultos() })
 	
 	method transportar(destino, camino) {
+		self.validarExcesoDePeso()
 		destino.validarBultos(self)
 		camino.validarViajar(self)
 		destino.depositar(self)
 		self.cosas().clear()
+	}
+	method validarExcesoDePeso() {
+		if (self.excedidoDePeso()) {
+			self.error("El camión está excedido de peso, tiene " + self.pesoTotal() + " y el peso máximo es " + pesoMaximo)
+		}
 	}
 }

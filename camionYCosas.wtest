@@ -10,7 +10,7 @@ describe "test de camion y cosas" {
     assert.that(camion.todoPesoPar())
   }
   
-  test "alguno pesa " {
+  test "alguno pesa" {
     camion.cargar(knightRider)
     camion.cargar(bumblebee)
     
@@ -129,7 +129,7 @@ describe "test de camion y cosas" {
     assert.notThat(camion.tieneAlgoQuePesaEntre(100, 200))
   }
   
-  test "la cosa más pesada es " {
+  test "la cosa más pesada" {
     camion.cargar(knightRider)
     camion.cargar(bumblebee)
     

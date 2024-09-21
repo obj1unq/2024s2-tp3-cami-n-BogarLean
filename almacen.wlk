@@ -1,6 +1,6 @@
 import camion.*
 object almacen {
-    // El depósito debe ser también un set? yo lo veo más como list
+    // ¿El depósito debe ser también un set? yo lo veo más como list
     // creo que podría tener más cosas aunque sean iguales
     const property deposito = #{}
     var property maxBultos = 3
@@ -12,7 +12,7 @@ object almacen {
     method validarBultos(camion) {
         if (not self.puedeAlmacenar(camion.totalBultos())) {
             self.error("El camion tiene " + camion.totalBultos() + 
-            " de bultos y el almacén soporta " + maxBultos + " bultos")
+            " bultos y el almacén soporta " + maxBultos + " bultos")
         }
     }
     method puedeAlmacenar(cantidad) {

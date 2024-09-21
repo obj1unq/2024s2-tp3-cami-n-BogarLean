@@ -3,10 +3,7 @@ object knightRider {
 	const property nivelPeligrosidad = 10
 	const property bultos = 1
 	
-	method cambios() {
-		
-		// nada
-	}
+	method cambios() {}
 }
 
 object bumblebee {
@@ -33,9 +30,6 @@ object paqueteDeLadrillos {
 	var property cantidad = 0
 	const property nivelPeligrosidad = 2
 	
-	// ¿Tiene sentido que la cantidad sea 0
-	// y que el bulto siga siendo 1? tal vez la cantidad
-	// no debería ser 0 o menor a 0
 	method bultos() = if (cantidad <= 100) {
 		1
 	} else {
@@ -125,8 +119,5 @@ object embalajeDeSeguridad {
 	
 	method nivelPeligrosidad() = cosa.nivelPeligrosidad() / 2
 	
-	method cambios() {
-		
-		// nada
-	}
+	method cambios() {}
 }
