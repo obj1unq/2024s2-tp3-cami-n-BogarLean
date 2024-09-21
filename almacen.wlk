@@ -7,16 +7,16 @@ object almacen {
 
     method depositar(camion) {
         self.validarBultos(camion)
-        deposito.add(camion.cosas())
+        deposito.addAll(camion.cosas())
     }
     method validarBultos(camion) {
-        if (not self.excesoDeBultos(camion.totalBultos())) {
+        if (not self.puedeAlmacenar(camion.totalBultos())) {
             self.error("El camion tiene " + camion.totalBultos() + 
             " de bultos y el almacén soporta " + maxBultos + " bultos")
         }
     }
-    method excesoDeBultos(cantidad) {
-      return (maxBultos - self.totalBultos()) <= cantidad
+    method puedeAlmacenar(cantidad) {
+      return (maxBultos - self.totalBultos()) >= cantidad
     }
 
     method totalBultos() = deposito.sum({ cosa => cosa.bultos() })
